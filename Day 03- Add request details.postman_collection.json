@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "282985a7-325d-4853-9ab7-2f13128b4fd8",
+		"name": "Day 03: Add request details",
+		"description": "## Instructions for Day 3: Add request details\n\n1.  **Get the challenge:** Fork [the parent collection `Day 03: Add request details`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-969f4824-25ba-4ed6-8926-f71ce4ee079d) to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Sending body data](https://learning.postman.com/docs/sending-requests/requests/#sending-body-data)\n*   [Configuring request headers](https://learning.postman.com/docs/sending-requests/requests/#configuring-request-headers)\n    \n\n## Additional resources\n\n*   [Upload a File via POST Request](https://youtu.be/S7bwkys6D0E) video\n*   [API requests](https://www.tiktok.com/@joycejetson/video/7062401624437951791) tiktok\n    \n\n## Next challenge\n\n*   [Authorization](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-56245825-855e-4b97-ae54-b78441d511e4)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Add request details",
+			"item": [
+				{
+					"name": "raw JSON body",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": \"doodles\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/post",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\n1. **Add a request**: Add a request to the folder `Add request details` called `raw JSON body` with the following details:\n  - `POST` method\n  - <code>\\{{baseURL\\}}/post</code> request URL\n  - Select the environment you created in the previous challenge so that Postman reads in the appropriate value for <code>\\{{baseURL\\}}</code> in the request URL. \n1. **Include a body**: Under the **Body** tab, update the body type to `raw` and in the dropdown at the end where it says \"Text\", select `JSON`. Add a JSON object, like the following, and then make sure you get back a 200 status code when you hit **Send**. You can also view the results of the request to see the `json` element in the response has copied whatever JSON you added in the outgoing body. If the response says `\"json\": null,` then you might have done something incorrectly.\n```\n{\n\"data\": \"doodles\"\n}\n```\n  When you added a raw JSON request body, Postman auto-generated a header `Content-Type: application/json` header under the **Headers** tab. Take a look. You may need to click the **hidden** button to show the headers. This is also where you can [configure other request headers](https://learning.postman.com/docs/sending-requests/requests/#configuring-request-headers).\n1. **Review other request options**: There's a bunch of other ways to configure your requests, like updating the URL, method, and other optional values such as auth and parameters. Take a minute to learn more about [adding request details](https://learning.postman.com/docs/sending-requests/requests/#adding-request-detail). We'll dig deeper into some of these sections in later challenges too.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation."
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 03: Add request details\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"let folder = collection.item.find(fol => { return fol.name == \"Add request details\"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(folder.item.length, 'check number of requests').is.greaterThan(0)\r",
+									"\r",
+									"    let newRequest = folder.item.find(req => { return req.name === \"raw JSON body\"})\r",
+									"\r",
+									"    pm.expect(newRequest.name, 'check name').equals(\"raw JSON body\")\r",
+									"    pm.expect(newRequest.request.method, 'check method').equals(\"POST\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"JSON body correct\", () => {\r",
+									"    let newRequest = collection.item[0].item.find(req => { return req.name === \"raw JSON body\"})\r",
+									"\r",
+									"    pm.expect(newRequest.request.body.mode, 'check mode').equals(\"raw\")\r",
+									"    pm.expect(newRequest.request.body.options.raw.language, 'check language').equals(\"json\")\r",
+									"    pm.expect(newRequest.request.body.raw, 'check json').to.not.be.empty\r",
+									"    // TODO: add json schema validation\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media3.giphy.com/media/THIvbrqPhSsTHxpuua/giphy.gif?cid=ecf05e47eb8e64j0aasd8oot8tck9rg49vhqqzxee75hwzq1&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/yFQ0ywscgobJK/giphy.gif?cid=ecf05e471upg7bl8bd0stb0p3jmazll50q1ctfg2ljwl4ks3&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collection_uid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collection_uid}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Get the collection ID:** Select the collection in the sidebar. In the context bar to the right, select the `Info` icon and copy the collection `ID`. Make sure you're getting the `ID` for the collection, and not this request.\n1. **Update the request URL:** Update the `collection_uid` in the request URL with the `ID` you got from the previous step, using any method you prefer. \n1. **Add your Postman API key**: Add your [Postman API key](https://go.postman.co/settings/me/api-keys) using any method you prefer. You can use the same environment you created in the previous challenge. Or add a collection or global variable, that we will learn about in upcoming challenges.\n> ⚠ DON'T LEAK YOUR SECRETS! \n> Do not paste your API key under the **Headers** tab. Instead, use a variable. When working with variables, it's very important to add sensitive values like an API key to the `CURRENT VALUE` (and not `INITIAL VALUE`) of your public workspace since initial values can be viewed publicly in a public workspace. Storing sensitive values only in `CURRENT VALUE` keeps your secrets private in a team or public workspace. If you accidentally show your API key, [revoke and regenerate your API key](https://go.postman.co/settings/me/api-keys).\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	]
+}
