@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "7caf1850-89d9-419a-9ca5-64863e0f5e06",
+		"name": "Day 00: Pre-requisites",
+		"description": "## Instructions for Day 00: Pre-requisites\n\n1. **Sign in to Postman:** Create a Postman account if you don't have one already, and log into [Postman for the web](https://go.postman.co) in your browser.\n  - To use Postman in a web browser, download and run the [Postman agent](https://www.postman.com/downloads/) on your local machine to overcome cross-origin resource sharing (CORS) limitations. The agent is not the same as the app. On a Mac, you will see an icon for the Postman agent running in the status menu at the top right of your computer screen. On a Windows machine, the Postman agent icon displays in the system tray at the bottom right of your computer screen.\n  - If you don't want to use Postman in a web browser with the agent, you can instead download and install the Postman app for Mac, Windows, or Linux.\n1. **Create a public workspace**: [Create a new Postman workspace](https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/creating-workspaces/#creating-a-public-workspace) with visibility set to `Public` to show your work. Every day, fork a new challenge from [the parent workspace](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/overview) to your own, and work through the day's challenge. Change the name of your public workspace to deter others from directly copying your answers. \n1. **Set an email notification (optional)**: If you want to receive an email reminder every day for 30 days, follow the instructions in the folder `Email notification`.\n\nAnd that's all for today! Stick with your challenges for 30 days, and sharpen your Postman skills.\n\n## Concepts covered\n- [Creating a public workspace](https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/creating-workspaces/#creating-a-new-workspace)\n- [Agent for the Postman web client](https://youtu.be/6xlJUx2ZMy4) video\n- [Monitoring](https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/monitoring-apis-websites/)\n\n## Next challenge\n- [Fork a collection](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-02f21db3-4424-4a4d-8bae-1b1fe1f75987)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Email notification",
+			"item": [
+				{
+					"name": "notif",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let challenges = [",
+									"    [\"Day 00: Pre-requisites\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-07137a33-d3d9-4362-afef-16daca946e03\"],",
+									"    [\"Day 01: Fork a collection\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-02f21db3-4424-4a4d-8bae-1b1fe1f75987\"],",
+									"    [\"Day 02: Collections and environments\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-3e883267-c7b7-4696-81a8-13308d3fda7f\"],",
+									"    [\"Day 03: Add request details\",\"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-969f4824-25ba-4ed6-8926-f71ce4ee079d\"],",
+									"    [\"Day 04: Authorization\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-56245825-855e-4b97-ae54-b78441d511e4\"],",
+									"    [\"Day 05: Variables\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7b48e949-713b-4922-bb69-73fb949cd5af\"],",
+									"    [\"Day 06: Tests\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-1ac59603-2ea0-4568-ac54-9f793bc06456\"],",
+									"    [\"Day 07: Debugging\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-3a90a346-b978-4840-816d-abcec1df7111\"],",
+									"    [\"Day 08: Run a collection\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-1da88e07-1c0a-401c-996b-a3f2c9c3f486\"],",
+									"    [\"Day 09: Scripting\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7b82a13b-7c2a-4b51-9620-66a51df3e313\"],",
+									"    [\"Day 10: Mock services\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-900c913f-3ce2-4445-9508-4f994faeff10\"],",
+									"    [\"Day 11: Monitoring\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7e3a6d75-57cb-4e54-82ff-b4f9e402c8cc\"],",
+									"    [\"Day 12: Postman API\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-2f4b05dd-10d6-4f0b-8844-b9e8679881d6\"],",
+									"    [\"Day 13: Newman\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-a509b7b4-4b46-4593-9dec-2bafbe7d9524\"],",
+									"    [\"Day 14: OAuth\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0e372950-c58c-483d-aea9-fe676547e6f0\"],",
+									"    [\"Day 15: Write to file\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-b9204eb2-a00b-46b5-b011-89375b39d28b\"],",
+									"    [\"Day 16: Pagination\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-e8bb1023-b130-4c60-a8d6-6d983b5b9613\"],",
+									"    [\"Day 17: Visualizations\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0b4d01c7-25b5-4296-91e2-bad1baaf3c6d\"],",
+									"    [\"Day 18: API specifications\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-c385b569-e55a-4d4f-b252-51a33311ca78\"],",
+									"    [\"Day 19: GraphQL\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-bd7ff4ba-c209-47b3-85d7-514a7ce0f3bf\"],",
+									"    [\"Day 20: Documentation\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0f00502d-d2d8-45fc-bd69-0fbb68eb5733\"],",
+									"    [\"Day 21: Versioning\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-8b2c3197-1df3-44ba-9687-eba60470d270\"],",
+									"    [\"Day 22: Public profile\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-5cbfbc58-e32f-4e62-b6ee-558b38701d71\"],",
+									"    [\"Day 23: Data files\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-087bf975-4820-44b2-82be-2664a55d9958\"],",
+									"    [\"Day 24: Using libraries\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-c8009938-a174-48d3-82b2-8b2137068508\"],",
+									"    [\"Day 25: Dynamic request bodies\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-2f480c99-4608-4210-b3c5-5a75c7e7a384\"],",
+									"    [\"Day 26: Parse HTML response\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-9f9419fe-5249-4b44-b07f-4cb3ef913c81\"],",
+									"    [\"Day 27: Scenario testing\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-e9968036-7ad8-4daa-97c3-331184213392\"],",
+									"    [\"Day 28: UI testing\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-01eeea90-778a-4d8f-82b6-87e16ca7d45e\"],",
+									"    [\"Day 29: Webhooks\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7d96fb0a-52d9-4c7e-b044-6f5c3f6ee12f\"],",
+									"    [\"Day 30: Submit a pull request\", \"https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-88dc2f3e-8335-40f5-857d-cc053bdaa8ee\"]",
+									"]",
+									"",
+									"// calculate the days elapsed to determine which reminder to send and for how long",
+									"const moment = require('moment')",
+									"let startday = pm.response.json().args.set_start_day",
+									"let progression = moment().diff(moment(startday), 'days')",
+									"let totalChallengesIndex = 31",
+									"",
+									"if (progression <= totalChallengesIndex) {",
+									"    pm.test(\"daily challenge reminder\", function() {",
+									"        // write a failing test to trigger a monitor notification",
+									"        pm.expect(true).to.be.false",
+									"    })",
+									"    console.log(`It's time to do the challenge for ${challenges[progression][0]} - good luck! ${challenges[progression][1]}`)",
+									"} else {",
+									"    pm.test(\"30 days have elapsed\", function() {",
+									"        // write a passing test so no notifications are triggered",
+									"        pm.expect(true).to.be.true",
+									"    })",
+									"    console.log(\"Remember to pause the monitor after 30 days\")",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/post?set_start_day=July 02, 2022",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "set_start_day",
+									"value": "July 02, 2022",
+									"description": "Enter TODAY's date (formatted like `March 18, 2021`) to schedule an email notification that begins on the next day."
+								}
+							]
+						},
+						"description": "1.  **Fork the collection**: Fork the collection [`Day 00: Pre-requisites`](https://postman.postman.co/workspace/30-days-of-Postman---for-develo~f1c6b0a9-b930-4165-9aa4-f655dd7051b5/documentation/1559645-07137a33-d3d9-4362-afef-16daca946e03) to your own public workspace.\n1.  **Update the start day**: Under the **Params** tab of this request, enter today's date (formatted like `March 18, 2021`) as the value for `set_start_day` to schedule an email notification that begins on the next day, and save your changes.\n1.  **Schedule a monitor**: This is not a typical usage of [monitoring](https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/monitoring-apis-websites/) (which we will learn about in a future challenge). We are relying on Postman's monitoring capabilities to send us an email reminder every day for 30 days.\n    \n    - Hover near the collection name `Day 00: Pre-requisites` to click the ellipses (...) icon and select \"Monitor collection\".\n    -   Give your monitor a name like `Daily challenge email notification`. To schedule the monitor to run, under \"Run this monitor\" be sure that `Week Timer` is selected in the first dropdown, then choose `Every day` in the second dropdown. In the third dropdown, choose a designated time that you prefer.\n    -   Check the option `Receive email notifications for run failures and errors`, and then click **Create**.\n    \n    You will receive an email notification every day that a test is failing (as expected) for 30 days. You can pause or edit the settings for this monitor under **Monitors** in the sidebar."
+					},
+					"response": []
+				}
+			],
+			"description": "**OPTIONAL**: To help you stay on track, schedule this collection to run as [a Postman monitor](https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/monitoring-apis-websites/) to receive an email reminder every day for 30 days. This is not a typical usage of monitoring (which we will learn about in a future challenge). We are relying on a test to fail, as expected, triggering an email notification every day for 30 days. \n\nFollow the instructions in the request `notif`."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "day",
+			"value": "0"
+		}
+	]
+}
