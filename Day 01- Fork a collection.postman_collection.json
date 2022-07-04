@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "48c40b40-57e8-46eb-ab48-77c444923c74",
+		"name": "Day 01: Fork a collection",
+		"description": "## Instructions for Day 1: Fork a collection\n\n1.  **Get the challenge:** Fork [the parent collection `Day 01: Fork a collection`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-02f21db3-4424-4a4d-8bae-1b1fe1f75987) to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder `Fork a collection`. Expand the context bar on the right to follow the instructions in the collection documentation.If you find it bothersome to navigate between the documentation while working in a different area of Postman, remember that you can open a new tab to keep your place in the documentation, and then switch between tabs.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Forking a collection](https://learning.postman.com/docs/collaborating-in-postman/version-control-for-collections/#forking-a-collection)\n*   [Viewing documentation](https://learning.postman.com/docs/publishing-your-api/viewing-documentation/)\n*   [Sending a request](https://learning.postman.com/docs/sending-requests/requests/)\n    \n\n## Additional resources\n\n*   [Version Control for Collections](https://youtu.be/QKxukXJWRPI) video\n*   [Fork vs import](https://www.tiktok.com/@joycejetson/video/7060859372649467183) tiktok\n    \n\n## Next challenge\n\n*   [Collections and environments](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-3e883267-c7b7-4696-81a8-13308d3fda7f)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Fork a collection",
+			"item": [
+				{
+					"name": "echo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payload\": \"hello world\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						},
+						"description": "It's time to work on your first challenge.\n\n1. **Review the request:** Notice the different parts of this API request.\n  - `POST` HTTP request method - to send new data to an API\n  - `https://postman-echo.com/post` request URL\n  - JSON request body\n1. **Send the request**:  **Send** the request, and look at the response on the bottom.\n  - HTTP status code\n  - Response time\n  - Response size\n  - Response body\n1. **Inspect the response body:** Under the **Pretty** view of the response body, inspect the JSON data object returned from the server. This sample endpoint from [Postman's Echo API](https://www.postman.com/postman/workspace/published-postman-templates/documentation/631643-f695cab7-6878-eb55-7943-ad88e1ccfd65?ctx=documentation) echoes back data provided by the client.\n\n  In the JSON data response, find a header called `user-agent` and copy the value that appears after the colon symbol. We will need this data for the next step. It should look something like this:\n\n```\n\"user-agent\": \"<copy-this-part-here>\",\n```\n\nOnce you find this data, move on to the next folder in this collection to submit your solution."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 3\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"User Agent is correct\", () => {\r",
+									"    pm.expect(pm.response.json().args[\"user-agent\"]).includes(\"PostmanRuntime/\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media4.giphy.com/media/THIvbrqPhSsTHxpuua/200w.webp\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/CM1rHbKDMH2BW/200.webp\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/get?user-agent=PostmanRuntime/7.29.2",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							],
+							"query": [
+								{
+									"key": "user-agent",
+									"value": "PostmanRuntime/7.29.2",
+									"description": "Replace the value `your-data-here` with the data you found in the previous step. "
+								}
+							]
+						},
+						"description": "It's time to submit your first solution.\n\n1.  **Enter your data:** Under the **Params** tab, find the key `user-agent`. Replace the value `your-data-here` with the data you found in the previous step. When you update the query parameters, notice the request URL also updates with this new information.\n1.  **Validate your solution**: Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n1.  Under the **Tests** tab, click on the `Visualize` option to see some fun output!\n    \n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	]
+}
