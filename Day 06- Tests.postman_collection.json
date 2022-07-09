@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "2acbbc0a-c268-459a-9134-28653752de14",
+		"name": "Day 06: Tests",
+		"description": "## Instructions for Day 6: Tests\n\n1.  **Get the challenge:** Fork [the parent collection `Day 06: Tests`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-1ac59603-2ea0-4568-ac54-9f793bc06456) to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Writing tests](https://learning.postman.com/docs/writing-scripts/test-scripts/)\n*   [Test snippets](https://learning.postman.com/docs/writing-scripts/test-scripts/#using-snippets)\n    \n\n## Additional resources\n\n*   [Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/) in the docs\n*   [Intro to writing tests - with examples](https://www.postman.com/postman/workspace/postman-team-collections/collection/1559645-13bd44c4-94ec-420a-8390-8ff44b60f14d?ctx=documentation) sample collection\n*   [Chai.js](https://www.chaijs.com/) docs\n*   [Tests](https://www.tiktok.com/@joycejetson/video/7063452982494547247) tiktok\n    \n\n## Next challenge\n\n*   [Debugging](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-3a90a346-b978-4840-816d-abcec1df7111)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "jokes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									" pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Expected a 404\", function () {",
+									" pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.chucknorris.io/jokes/random",
+							"protocol": "https",
+							"host": [
+								"api",
+								"chucknorris",
+								"io"
+							],
+							"path": [
+								"jokes",
+								"random"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nLots of people use Postman to test and explore their APIs. In this challenge, we will learn how to write tests to programmatically assert that your API is behaving as you expect it to. Let's head over to the [Chuck Norris API](https://api.chucknorris.io/).\n\n1. **Add a request**: Add a request called `jokes` to the folder `Tests` with the following details:\n  - `GET` method\n  - `https://api.chucknorris.io/jokes/random` request URL\n  \n  Send the request and inspect the response on the bottom. Think about how you would assert that the API is behaving as expected. Maybe you received a certain status code, the response body is formatted a certain way, or it contains a specific piece of data.\n1. **Add a test**: Back in the request builder at the top, find the **Tests** tab, and expand the [snippets](https://learning.postman.com/docs/writing-scripts/test-scripts/#using-snippets) from the right. This is a list of the most popular test scripts written in JavaScript. Find one called `Status code: Code is 200`, and click it to insert at test that looks like this:\n```\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n```\n  You can define tests using the `pm.test` function, providing a name and function that returns a boolean (`true` or `false`) value indicating whether the test passed or failed. Send the request, and look under the **Tests** tab in the response viewer at the bottom to see your test result.\n1. **Write a test that fails**: Under the **Tests** tab in the request builder on the top, copy and paste that snippet beneath the original one. Update the name of the test to `Expected a 404`, and then replace the status code assertion from `200` to `404`. The syntax for the assertion in this function is from a library called [Chai.js](https://www.chaijs.com/). This test expects a 404 status code. Send the request again, and review your test results. You should have one passing and one failing test. Save your changes.\n\nIn upcoming challenges, we'll learn more about [testing for collections and folders](https://learning.postman.com/docs/writing-scripts/test-scripts/#testing-collections-and-folders), automating tests, and more advanced scripts.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 06: Tests\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let snippetRequest = collection.item[0].item.find(req => { return req.name === \"jokes\"})\r",
+									"    pm.expect(snippetRequest.name, 'check name').equals(\"jokes\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Tests added correctly\", () => {\r",
+									"    let snippetRequest = collection.item[0].item.find(req => { return req.name === \"jokes\"})\r",
+									"    let test = snippetRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"\r",
+									"    pm.expect(test.script.exec.length, 'check tests').is.greaterThan(2)\r",
+									"    pm.expect(test.script.exec.toString(), 'check 200 syntax').to.include(\"pm.response.to.have.status(200)\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check 404 syntax').includes(\"pm.response.to.have.status(404)\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/NfzERYyiWcXU4/giphy.gif?cid=ecf05e47hkcrsrk4nchx80kdh6t555wpdy3wentp4rcg060x&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/z7j4LWSvmxIys/giphy.gif?cid=ecf05e477enyb2x4bit786kq61xwzx3ri4mj82j95hg50vm1&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/13776808-2acbbc0a-c268-459a-9134-28653752de14",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"13776808-2acbbc0a-c268-459a-9134-28653752de14"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Get the collection ID:** Get the collection `ID` in any way that you prefer.\n1. **Update the request URL:** Update the `collection_uid` in the request URL with the `ID` you got from the previous step, again using any method you prefer. \n1. **Add your Postman API key**: Add your [Postman API key](https://go.postman.co/settings/me/api-keys) to your environment so that Postman can authorize your request as shown under the **Headers** tab.\n  > ⚠ **Remember to only use `CURRENT VALUE` for sensitive tokens like your API key**\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
