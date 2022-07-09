@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "10af15c3-b1bc-43b6-9817-383ad4a466ca",
+		"name": "Day 05: Variables",
+		"description": "## Instructions for Day 5: Variables\n\n1.  **Get the challenge:** Fork [the parent collection `Day 05: Variables`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7b48e949-713b-4922-bb69-73fb949cd5af) to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Variable scopes](https://learning.postman.com/docs/sending-requests/variables/)\n*   [Defining variables](https://learning.postman.com/docs/sending-requests/variables/#defining-variables)\n*   [Accessing variables](https://learning.postman.com/docs/sending-requests/variables/#defining-variables)\n    \n\n## Additional resources\n\n*   [10 tips for working with variables](https://blog.postman.com/10-tips-for-working-with-postman-variables/) blog\n*   [Variables](https://www.tiktok.com/@joycejetson/video/7063092655215119663) tiktok\n    \n\n## Next challenge\n\n*   [Tests](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-1ac59603-2ea0-4568-ac54-9f793bc06456)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Variables",
+			"item": [
+				{
+					"name": "collection variable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{coindeskBaseUrl}}/v1/bpi/currentprice/btc.json",
+							"host": [
+								"{{coindeskBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"bpi",
+								"currentprice",
+								"btc.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "global variable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{coindeskBaseUrl}}/v1/bpi/currentprice/{{currency}}.json",
+							"host": [
+								"{{coindeskBaseUrl}}"
+							],
+							"path": [
+								"v1",
+								"bpi",
+								"currentprice",
+								"{{currency}}.json"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nWe've already used environment variables in previous challenges. Let's use the [CoinDesk API](https://www.coindesk.com/coindesk-api) to learn more about variables in Postman. This API allows you to programmatically access the price of bitcoin.\n\n1. **Add a request**: Add a request called `collection variable` to the folder `Variables` with the following details:\n  - `GET` method\n  - `https://api.coindesk.com/v1/bpi/currentprice/btc.json` request URL\n1. **Add a collection variable**: Highlight `https://api.coindesk.com` in the request URL and [set a new collection variable](https://learning.postman.com/docs/sending-requests/variables/#defining-variables) called `coindeskBaseUrl` with the value `https://api.coindesk.com`. Hover on the new variable to verify the variable is set at the proper scope (collection). \n\n  A collection variable is tightly coupled with the collection and can only be used with that collection. On the other hand, environment variables can be used across many collections, in the same way you've stored your Postman API key in the same environment to be used with different collections. \n\n  You can also create and edit collection variables by selecting the collection and tabbing over to **Variables**. We will also learn how to programmatically set variables in future challenges. Hit send to ensure a 200 status code, and save your changes.\n1. **Add a global variable**: Duplicate the request within this folder, and rename the second request to `global variable`. Create a global variable using any way that you prefer. The global variable should be called `currency` with the value `btc` replacing the \"btc\" part of the request URL path. A global variable is accessible within the current workspace. You can manually edit global variables in the **Environments** tab on the left sidebar, under **Globals**. Do that now to update `btc` to a [different currency](https://api.coindesk.com/v1/bpi/supported-currencies.json) of your choosing, like `usd`. Send to ensure a 200 status code, and save your changes.\n1. **Variable scopes**: Postman provides a number of variable scopes to suit your particular use case. Learn more about [variable scopes and when to choose a variable scope](https://learning.postman.com/docs/sending-requests/variables/#variable-scopes).\n1. **Initial and current values**: As you've learned from previous challenges, initial values may be accessible to others in a Team or Public workspace. Current values are local, and not synced or shared. Since we are working in a public workspace, it's very important to only add sensitive data to `CURRENT VALUE`. Learn more about [sharing and persisting data](https://learning.postman.com/docs/sending-requests/variables/#sharing-and-persisting-data).\n\nIn upcoming challenges, we'll learn more about defining and accessing variables in scripts, data variables, and dynamic variables.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 05: Variables\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Requests added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(2)\r",
+									"\r",
+									"    let collRequest = collection.item[0].item.find(req => { return req.name === \"collection variable\"})\r",
+									"    pm.expect(collRequest.name, 'check name').equals(\"collection variable\")\r",
+									"\r",
+									"    let globalRequest = collection.item[0].item.find(req => { return req.name === \"global variable\"})\r",
+									"    pm.expect(globalRequest.name, 'check name').equals(\"global variable\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Variables added correctly\", () => {\r",
+									"    let collRequest = collection.item[0].item.find(req => { return req.name === \"collection variable\"})\r",
+									"    pm.expect(collRequest.request.url.raw, 'check collection variable').equals(\"{{coindeskBaseUrl}}/v1/bpi/currentprice/btc.json\")\r",
+									"\r",
+									"    let globalRequest = collection.item[0].item.find(req => { return req.name === \"global variable\"})\r",
+									"    pm.expect(globalRequest.request.url.raw, 'check global variable').equals(\"{{coindeskBaseUrl}}/v1/bpi/currentprice/{{currency}}.json\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media4.giphy.com/media/USyPsstb0PS9Am0l6q/giphy.gif?cid=ecf05e47pnhqz2j2kbkem4z2g0fnhfdqnhsq4q8rfzsm6g8r&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/TZBED1pP5m8N2/giphy.gif?cid=ecf05e477enyb2x4bit786kq61xwzx3ri4mj82j95hg50vm1&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/13776808-10af15c3-b1bc-43b6-9817-383ad4a466ca",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"13776808-10af15c3-b1bc-43b6-9817-383ad4a466ca"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Get the collection ID:** Get the collection `ID` in any way that you prefer.\n1. **Update the request URL:** Update the `collection_uid` in the request URL with the `ID` you got from the previous step, again using any method you prefer. \n1. **Add your Postman API key**: Add your [Postman API key](https://go.postman.co/settings/me/api-keys) using any method you prefer, so that Postman can authorize your request as shown under the **Headers** tab.\n  > ⚠ **Remember to only use `CURRENT VALUE` for sensitive tokens like your API key**\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "coindeskBaseUrl",
+			"value": "https://api.coindesk.com"
+		}
+	]
+}
