@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "7d4f0504-29db-4b7a-95db-5b2fa53631da",
+		"name": "Day 09: Scripting",
+		"description": "## Instructions for Day 9: Scripting\n\n1.  **Get the challenge:** Fork [the parent collection `Day 09: Scripting`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7b82a13b-7c2a-4b51-9620-66a51df3e313) to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Scripting in Postman](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n*   [Building workflows](https://learning.postman.com/docs/running-collections/building-workflows/)\n    \n\n## Additional resources\n\n*   [Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/)\n*   [Scripting](https://www.tiktok.com/@joycejetson/video/7065370176992120110) tiktok\n    \n\n## Next challenge\n\n*   [Mock services](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-900c913f-3ce2-4445-9508-4f994faeff10)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Scripting",
+			"item": [
+				{
+					"name": "get random user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"user_name\", pm.response.json().results[0].name.first+\" \"+pm.response.json().results[0].name.last)",
+									"pm.collectionVariables.set(\"user_email\", pm.response.json().results[0].email)",
+									"pm.collectionVariables.set(\"user_id\", pm.response.json().results[0].login.uuid)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://randomuser.me/api/",
+							"protocol": "https",
+							"host": [
+								"randomuser",
+								"me"
+							],
+							"path": [
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "echo the user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setNextRequest(null)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{user_name}}\",\n    \"email\": \"{{user_email}}\",\n    \"id\": \"{{user_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nLet's use the [Random User API](https://randomuser.me/) to learn how to script in Postman.\n\n1. **Add a request**: Add a request called `get random user` to the folder `Scripting` with the following details:\n  - `GET` method\n  - `https://randomuser.me/api/` request URL\n\n  Send the request to ensure a successful response and save your changes.\n1. **Add another request**: Add a second request called `echo the user` after the first one with the following details:\n  - `POST` method\n  - `https://postman-echo.com/post` request URL\n  - JSON request body formatted like this:\n```\n{\n    \"name\": \"Dawn Ellis\",\n    \"email\": \"dawn.ellis@example.com\",\n    \"id\": \"334eecea-607d-4111-90ee-e57bea971654\"\n}\n```\n1. **Chain the requests**: Return to the **Tests** tab of the first request to capture the data required for the second request. **Use collection variables** this time. Step through the workflow by running each request one at a time to ensure you are getting and setting the variables properly and passing the data correctly.\n1. **Run the collection**: Once you think you have it, run this folder using the [collection runner](https://learning.postman.com/docs/running-collections/intro-to-collection-runs/) to make sure there are no errors in the folder. If you want to run the entire collection instead of the folder, add [`postman.setNextRequest(null)`](https://learning.postman.com/docs/running-collections/building-workflows/) under the **Tests** tab of the second request to stop the collection run from continuing on to the next folder. Remember to save your changes.\n  \nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 6\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 09: Scripting\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(2)\r",
+									"\r",
+									"    let randomRequest = collection.item[0].item.find(req => { return req.name === \"get random user\"})\r",
+									"    pm.expect(randomRequest.name, 'check name').equals(\"get random user\")\r",
+									"    pm.expect(randomRequest.request.method, 'check method').equals(\"GET\")\r",
+									"    pm.expect(randomRequest.request.url.raw, 'check url').includes(\"https://randomuser.me/api\")\r",
+									"\r",
+									"    let echoRequest = collection.item[0].item.find(req => { return req.name === \"echo the user\"})\r",
+									"    pm.expect(echoRequest.name, 'check name').equals(\"echo the user\")\r",
+									"    pm.expect(echoRequest.request.method, 'check method').equals(\"POST\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Echo body added correctly\", () => {\r",
+									"    let echoRequest = collection.item[0].item.find(req => { return req.name === \"echo the user\"})\r",
+									"\r",
+									"    pm.expect(echoRequest.request.body.mode, 'check mode').equals(\"raw\")\r",
+									"    pm.expect(echoRequest.request.body.options.raw.language, 'check language').equals(\"json\")\r",
+									"     // TODO add regex check for JSON body\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Variables set correctly\", () => {\r",
+									"    let randomRequest = collection.item[0].item.find(req => { return req.name === \"get random user\"})\r",
+									"    let test = randomRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"    pm.expect(test.listen, 'check test script').equals(\"test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check collection variables').includes(\"pm.collectionVariables.set\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media4.giphy.com/media/nNxT5qXR02FOM/giphy.gif?cid=ecf05e47jhenuwvoh3qjxuvzc8u90y0muhbxd0133ni34b2r&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/d78vbBA54uHFS/giphy.gif?cid=ecf05e47v5aqnsbm3b0a0bpxd4rs2qcaec1byw6v9fm7swzv&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/13776808-7d4f0504-29db-4b7a-95db-5b2fa53631da",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"13776808-7d4f0504-29db-4b7a-95db-5b2fa53631da"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Get the collection ID:** Get the collection `ID` in any way that you prefer.\n1. **Update the request URL:** Update the `collection_uid` in the request URL with the `ID` you got from the previous step, again using any method you prefer. \n1. **Add your Postman API key**: Add your [Postman API key](https://go.postman.co/settings/me/api-keys) to your environment, so that Postman can authorize your request as shown under the **Headers** tab.\n  > ⚠ **Remember to only use `CURRENT VALUE` for sensitive tokens like your API key**\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "firstName",
+			"value": ""
+		},
+		{
+			"key": "lastName",
+			"value": ""
+		},
+		{
+			"key": "emailAddress",
+			"value": ""
+		},
+		{
+			"key": "uuid",
+			"value": ""
+		},
+		{
+			"key": "user_name",
+			"value": ""
+		},
+		{
+			"key": "user_email",
+			"value": ""
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		}
+	]
+}
