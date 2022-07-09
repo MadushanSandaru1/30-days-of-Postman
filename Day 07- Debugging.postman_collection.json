@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "2223370d-de0f-42a8-a17c-9708a22a6bdb",
+		"name": "Day 07: Debugging",
+		"description": "## Instructions for Day 7: Debugging\n\n1.  **Get the challenge:** Fork [the parent collection `Day 07: Debugging`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-3a90a346-b978-4840-816d-abcec1df7111) to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Debugging and logs](https://learning.postman.com/docs/sending-requests/troubleshooting-api-requests/#debugging-and-logs)\n    \n\n## Additional resources\n\n*   [Debugging with the console](https://youtu.be/YCsURct9wCk) video\n*   [Powerful Debugging with the Postman Console](https://blog.postman.com/powerful-debugging-with-the-postman-console/) blog\n*   [How to use the Postman Console](https://www.postman.com/postman/workspace/postman-team-collections/collection/1559645-9349429e-3744-467b-a127-e3881f0dffc8?ctx=documentation) template\n*   [Debugging](https://www.tiktok.com/@joycejetson/video/7064627117618662703) tiktok\n    \n\n## Next challenge\n\n*   [Run a collection](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-1da88e07-1c0a-401c-996b-a3f2c9c3f486)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Debugging",
+			"item": [
+				{
+					"name": "apod",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let pics = pm.response.json()",
+									"pics.forEach((pic) => { console.log(pic.title, pic.url) })"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"nasa",
+								"gov"
+							],
+							"path": [
+								"planetary",
+								"apod"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "DEMO_KEY"
+								},
+								{
+									"key": "count",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nLet's check out [NASA's Astronomy Picture of the Day API](https://api.nasa.gov/planetary/apod) to learn more about debugging API calls in Postman. The [Postman console](https://learning.postman.com/docs/sending-requests/troubleshooting-api-requests/#debugging-and-logs) gives you visibility for debugging during development.\n\n1. **Add a request**: Add a request called `apod` to the folder `Debugging` with the following details:\n  - `GET` method\n  - `https://api.nasa.gov/planetary/apod` request URL\n  - `api_key` query parameter with value `DEMO_KEY`\n  - `count` query parameter with value `10`\n\n  Open the Postman console in the bottom left. Send the request and inspect the various parts of the network call (e.g. Network, Request Headers, Response Headers, Response Body).\n1. **Add a log statement**: Under the **Tests** tab of the request, add a `console.log()` function to output the title of each image to the Postman console. \n```\nlet pics = pm.response.json()\npics.forEach((pic) => { console.log(pic.title, pic.url) })\n```\n\n  This allows you to parse a response quickly while in development, instead of browsing through the entire payload. \n1. **Other log statements**: Using console statements like `console.log()`, `console.info()`, `console.warn()`, and `console.error()` in either the pre-request or tests script tabs lets you track request executions, exceptions, and errors during development. Feel free to add more log statements, perhaps conditionally, to provide more insights in what is being returned from the server.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 07: Debugging\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let apodRequest = collection.item[0].item.find(req => { return req.name === \"apod\"})\r",
+									"    pm.expect(apodRequest.name, 'check name').equals(\"apod\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Log statement added correctly\", () => {\r",
+									"    let apodRequest = collection.item[0].item.find(req => { return req.name === \"apod\"})\r",
+									"    let test = apodRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"\r",
+									"    pm.expect(test.listen).equals(\"test\")\r",
+									"    pm.expect(test.script.exec.length, 'check code').is.greaterThan(1)\r",
+									"    pm.expect(test.script.exec.toString(), 'check console log').to.include(\"console.log(\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/1DTBGm5Rfgymk/giphy.gif?cid=ecf05e47d6vrslci33v6t8hj5ote8n132ouneugi7agc1whu&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media0.giphy.com/media/M9yC8b0x7Y7oA/giphy.gif?cid=ecf05e477enyb2x4bit786kq61xwzx3ri4mj82j95hg50vm1&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/13776808-2223370d-de0f-42a8-a17c-9708a22a6bdb",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"13776808-2223370d-de0f-42a8-a17c-9708a22a6bdb"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Get the collection ID:** Get the collection `ID` in any way that you prefer.\n1. **Update the request URL:** Update the `collection_uid` in the request URL with the `ID` you got from the previous step, again using any method you prefer. \n1. **Add your Postman API key**: Add your [Postman API key](https://go.postman.co/settings/me/api-keys) to your environment, so that Postman can authorize your request as shown under the **Headers** tab.\n  > ⚠ **Remember to only use `CURRENT VALUE` for sensitive tokens like your API key**\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
