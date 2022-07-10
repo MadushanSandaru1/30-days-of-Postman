@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "6537c122-9f23-494e-b27f-629d3aaa515b",
+		"name": "Day 10: Mock services",
+		"description": "## Instructions for Day 10: Mock services\n\n1.  **Get the challenge:** Fork [the main collection `Day 10: Mock services`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-900c913f-3ce2-4445-9508-4f994faeff10) to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Setting up mock servers](https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/)\n    \n\n## Additional resources\n\n*   [Fake it till you make it: mocks for agile development](https://medium.com/better-practices/https-medium-com-postman-engineering-fake-it-till-you-make-it-mocks-for-agile-development-f4d050cad694)\n*   [Mocks sample collection](https://www.postman.com/postman-marketing-legacy/workspace/postman-marketing-s-public-workspace/documentation/3967924-4f82b9cf-ca7f-4874-aabf-befa47e5d350)\n*   [Mock servers](https://www.tiktok.com/@joycejetson/video/7065715107577449774) tiktok\n    \n\n## Next challenge\n\n*   [Monitoring](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7e3a6d75-57cb-4e54-82ff-b4f9e402c8cc)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Mock services",
+			"item": [
+				{
+					"name": "mock call",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://68a4ca39-ea4c-46d1-8df6-689222cff265.mock.pstmn.io",
+							"protocol": "https",
+							"host": [
+								"68a4ca39-ea4c-46d1-8df6-689222cff265",
+								"mock",
+								"pstmn",
+								"io"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "mock call",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://68a4ca39-ea4c-46d1-8df6-689222cff265.mock.pstmn.io",
+									"protocol": "https",
+									"host": [
+										"68a4ca39-ea4c-46d1-8df6-689222cff265",
+										"mock",
+										"pstmn",
+										"io"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 10 Jul 2022 05:53:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=0a0d54ace6242da6"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=96f8437eb1d161f5"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "120"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "119"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1657432453"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a4-7hO0T/XLq3TuFViTu2ZVQQdIY+A\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"name\": \"mockRequestNotFoundError\",\n        \"message\": \"To mock this request add an example response for the mock server to return.\",\n        \"header\": \"This is a modified response\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nThe term \"serverless\" doesn't mean you don't need servers, but rather you don't need to provision and manage those servers on your own. Similarly, mock services are easy-to-set-up APIs hosted on Postman servers that allow you to simulate real-world services in a controlled setting without the overhead of setting up your own services. \n\n1. **Add a mock**: There's [many ways to set up a mock](https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/). Let's start from scratch by going to the **Mock Servers** tab in the sidebar on the left. Click `Create Mock Server`, and add the mock to this collection `Day 10: Mock services`. Name your mock `mockForChallenge`. You won't need to fill out any of the other configuration details. Once you create the mock, copy the mock URL generated by Postman.\n1. **Call the mock**: Return to the folder `Mock services`, and add a request named `mock call` with the following details:\n  - `GET` method\n  - Use the mock URL from the previous step as the request URL\n\n  Send the call to see this message: `To mock this request add an example response for the mock server to return.` You will need to add at least one example in this collection.\n1. **Add an example**: Since we just got a response telling us to add an example, let's [save that last response](https://learning.postman.com/docs/sending-requests/examples/#response-from-the-server) as our first example by going to `Save response` > `Save as example`. When you create the example, you will see a new example (`e.g.`) display beneath the request in the left sidebar. Select the example to update the response body and status code of the example to something more interesting, and save your changes.\n1. **Call the mock again**: Select the request `mock call` again and hit send to see the new response. Feel free to add more examples to this request and learn how to trigger different responses.\n\nThis was a simple example of echoing back a static response. This functionality is especially helpful for:\n- Designing and prototyping a new service quickly \n- Isolating a system under test during debugging and testing by stubbing out external dependencies\n- Simulating edge cases that may be difficult or costly to incur in production\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 10: Mock services\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let mockRequest = collection.item[0].item.find(req => { return req.name === \"mock call\"})\r",
+									"    pm.expect(mockRequest.name, 'check name').equals(\"mock call\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Mock added correctly\", () => {\r",
+									"    let mockRequest = collection.item[0].item.find(req => { return req.name === \"mock call\"})\r",
+									"\r",
+									"    pm.expect(mockRequest.request.url.raw, 'check mock').to.include(\"mock.pstmn.io\")\r",
+									"\r",
+									"    // TODO add more checking around mock response using pm.sendRequest\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media4.giphy.com/media/3BMtVrNUsfFhpb7FUW/giphy.gif?cid=ecf05e47jhenuwvoh3qjxuvzc8u90y0muhbxd0133ni34b2r&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/FZuRP6WaW5qg/giphy.gif?cid=ecf05e47jhenuwvoh3qjxuvzc8u90y0muhbxd0133ni34b2r&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/13776808-6537c122-9f23-494e-b27f-629d3aaa515b",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"13776808-6537c122-9f23-494e-b27f-629d3aaa515b"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Get the collection ID:** Get the collection `ID` in any way that you prefer.\n1. **Update the request URL:** Update the `collection_uid` in the request URL with the `ID` you got from the previous step, again using any method you prefer. \n1. **Add your Postman API key**: Add your [Postman API key](https://go.postman.co/settings/me/api-keys) to your environment, so that Postman can authorize your request as shown under the **Headers** tab.\n  > ⚠ **Remember to only use `CURRENT VALUE` for sensitive tokens like your API key**\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
