@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "c7b0bc30-bd73-4bd0-abd8-2cfac5d832d6",
+		"name": "Day 11: Monitoring",
+		"description": "## Instructions for Day 11: Monitoring\n\n1.  **Get the challenge:** Fork [the parent collection `Day 11: Monitoring`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-7e3a6d75-57cb-4e54-82ff-b4f9e402c8cc) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Monitoring APIs and websites](https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/monitoring-apis-websites/)\n    \n\n## Additional resources\n\n*   [Using Postman to water my plants](https://blog.postman.com/using-a-postman-monitor-to-water-my-plants/) tutorial\n*   [Analyzing with reports](https://learning.postman.com/docs/designing-and-developing-your-api/view-and-analyze-api-reports/) docs\n*   [Postman API Monitoring Examples](https://www.postman.com/postman/workspace/postman-api-monitoring-examples/overview) workspace\n*   [Monitoring](https://www.tiktok.com/@joycejetson/video/7066058176470453550) tiktok\n    \n\n## Next challenge\n\n*   [Postman API](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-2f4b05dd-10d6-4f0b-8844-b9e8679881d6)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Monitoring",
+			"item": [
+				{
+					"name": "should I water the plants?",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									" pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if(pm.response.json().level < 0.60) {",
+									"    postman.setNextRequest(\"water the plants\");",
+									"} else {",
+									"    postman.setNextRequest(null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://water-ttl.herokuapp.com/hygrometer",
+							"protocol": "https",
+							"host": [
+								"water-ttl",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"hygrometer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "water the plants",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check watering test\", function() {",
+									"    pm.expect(pm.response.text()).to.include(\"success\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "duration",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://water-ttl.herokuapp.com/water",
+							"protocol": "https",
+							"host": [
+								"water-ttl",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"water"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\n1. **Add a request**: Add a request called `should I water the plants?` to the folder `Monitoring` with the following details.\n  - `GET` method\n  - `https://water-ttl.herokuapp.com/hygrometer` request URL\n\n  Send the request to see the current moisture level of our virtual plant. [Add a test](https://learning.postman.com/docs/writing-scripts/test-scripts/#using-snippets) to validate you're getting a successful response. \n1. **Add another request**: Add a second request (after the first one) called `water the plants` with the following details.\n  - `POST` method\n  - `https://water-ttl.herokuapp.com/water` request URL\n  - `duration` in the request body as form-data with a value of `10` for ten seconds of watering time\n  Don't hit **Send** yet! We only want to water the plant if the soil is too dry. If you already watered the plants, don't worry. Wait a bit to let the soil dry.\n1. **Add conditional logic**: Return to the first request `should I water the plants?` and add a conditional statement after the test under the **Tests** tab. If the soil is too dry (less than 0.60), then water the plant. If the soil is not too dry (greater than or equal to 0.60), then you don't want to make the next API request that waters the plant. You can stop a collection run using [`postman.setNextRequest(null)`](https://learning.postman.com/docs/running-collections/building-workflows/)\n1. **Add another test**: Return to the second request `water the plants` and add a test to ensure the plant watering was successful. Then stop the collection run using the function from the previous step. \n1. **Run the collection locally**: If we run the collection, all the requests in the collection will run sequentially unless we add JavaScript to control the workflow or terminate it. Run the collection in the Runner to ensure your code is working as expected. \n1. **Schedule a monitor**: Now that your collection is working the way you want it to, you don't want to come into Postman to run the collection every time you want to water your plants. [Schedule a monitor](https://learning.postman.com/docs/designing-and-developing-your-api/monitoring-your-api/setting-up-monitor/#configuring-a-monitor) to run the collection every weekday (Monday through Friday). The monitor should be in your public workspace.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 11: Monitoring\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(2)\r",
+									"\r",
+									"    let hygroRequest = collection.item[0].item.find(req => { return req.name === \"should I water the plants?\"})\r",
+									"    pm.expect(hygroRequest.name, 'check name').equals(\"should I water the plants?\")\r",
+									"\r",
+									"    let waterRequest = collection.item[0].item.find(req => { return req.name === \"water the plants\"})\r",
+									"    pm.expect(waterRequest.name, 'check name').equals(\"water the plants\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Tests added correctly\", () => {\r",
+									"    let hygroRequest = collection.item[0].item.find(req => { return req.name === \"should I water the plants?\"})\r",
+									"    pm.expect(hygroRequest.request.url.raw, 'check hygrometer url').equals(\"https://water-ttl.herokuapp.com/hygrometer\")\r",
+									"    pm.expect(hygroRequest.request.method, 'check hygrometer method').equals(\"GET\")\r",
+									"    let hygroTest = hygroRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"    pm.expect(hygroTest.listen, 'check test').equals(\"test\")\r",
+									"    pm.expect(hygroTest.script.exec.toString(), 'check test syntax').includes(\"pm.test(\")\r",
+									"\r",
+									"    let waterRequest = collection.item[0].item.find(req => { return req.name === \"water the plants\"})\r",
+									"    pm.expect(waterRequest.request.url.raw, 'check watering url').equals(\"https://water-ttl.herokuapp.com/water\")\r",
+									"    pm.expect(waterRequest.request.method, 'check watering method').equals(\"POST\")\r",
+									"    pm.expect(waterRequest.request.body.mode, 'check watering body').equals(\"formdata\")\r",
+									"    let waterTest = waterRequest.event.find(event => { return event.listen === \"test\"})\r",
+									"    pm.expect(waterTest.listen, 'check watering test').equals(\"test\")\r",
+									"    pm.expect(waterTest.script.exec.toString(), 'check test syntax').includes(\"pm.test(\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media3.giphy.com/media/10GN73YGycPXQk/giphy.gif?cid=ecf05e47yycow4lq21phg6iiousa8hen4wnx1b8i7qthywr8&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/rho9L4MsYXaec/giphy.gif?cid=ecf05e47bldpiutd9dxntnp1lap91adm0j12o7c9a7t30w7c&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/13776808-c7b0bc30-bd73-4bd0-abd8-2cfac5d832d6",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"13776808-c7b0bc30-bd73-4bd0-abd8-2cfac5d832d6"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Get the collection ID:** Get the collection `ID` in any way that you prefer.\n1. **Update the request URL:** Update the `collection_uid` in the request URL with the `ID` you got from the previous step, again using any method you prefer. \n1. **Add your Postman API key**: Add your [Postman API key](https://go.postman.co/settings/me/api-keys) to your environment, so that Postman can authorize your request as shown under the **Headers** tab.\n  > ⚠ **Remember to only use `CURRENT VALUE` for sensitive tokens like your API key**\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
