@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "a905056a-963e-4e48-b67e-6452745847e0",
+		"name": "Day 13: Newman",
+		"description": "## Instructions for Day 13: Newman\n\n1.  **Get the challenge:** Fork [the parent collection `Day 13: Newman`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-a509b7b4-4b46-4593-9dec-2bafbe7d9524) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Variables](https://learning.postman.com/docs/sending-requests/variables/)\n*   [Scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n*   [Writing tests](https://learning.postman.com/docs/writing-scripts/test-scripts/)\n*   [Running collections on the command line with Newman](https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/)\n    \n\n## Additional resources\n\n*   [Newman on GitHub](https://github.com/postmanlabs/newman)\n*   [Newman on npm](https://www.npmjs.com/package/newman)\n*   [Newman](https://www.tiktok.com/@joycejetson/video/7067909067594894638) tiktok\n    \n\n## Next challenge\n\n*   [OAuth](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0e372950-c58c-483d-aea9-fe676547e6f0)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Newman",
+			"item": [
+				{
+					"name": "planets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check response includes a planet called `Tatooine`\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Tatooine\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://swapi.dev/api/planets",
+							"protocol": "https",
+							"host": [
+								"swapi",
+								"dev"
+							],
+							"path": [
+								"api",
+								"planets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "species",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check response includes a language called `Ewokese`\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Ewokese\");",
+									"});",
+									"",
+									"pm.test(\"Average height greater than 100\", () => {",
+									"    let tall_height = pm.response.json().results.filter(a => a.average_height > 100);",
+									"    console.log(tall_height.length);",
+									"    pm.collectionVariables.set(\"talls\", tall_height.length);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://swapi.dev/api/species",
+							"protocol": "https",
+							"host": [
+								"swapi",
+								"dev"
+							],
+							"path": [
+								"api",
+								"species"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\n1. **Add a request**: Add a request called `planets` to the folder `Newman` with the following details:\n  - `GET` request method\n  - `https://swapi.dev/api/planets` request URL\n\n  [Write a Postman test](https://learning.postman.com/docs/writing-scripts/test-scripts/) to validate the response includes a planet called \"Tatooine\"\n1. **Add a second request**: Next, add a request called `species`:\n  - `GET` request method\n  - `https://swapi.dev/api/species` request URL\n\n  Write a Postman test to validate the response on the first page includes a species that speaks the \"Ewokese\" language.\n\n  Then write a script to see how many species included in the first page of results have an average height greater than 100. Log this number to the console. Save this number as a collection variable called `talls`, and then [persist the data](https://learning.postman.com/docs/sending-requests/variables/#sharing-and-persisting-data) so that `INITIAL VALUE` and `CURRENT VALUE` are the same.\n\n  Make sure the two requests are behaving as expected before moving on to the next step.\n1. **Set up Newman**: To run this collection from your command line, set up Newman on your local machine.\n  - Download and install [Node.js](https://nodejs.org/en/download/current/) for Linux, Windows, or Mac OSX\n  - Install [Newman](https://www.npmjs.com/package/newman) from npm globally on your system using the following command\n```\n$ npm install -g newman\n```\n1. **Export a collection to run it**: You can run a collection using a path to the file or the [Postman API](https://learning.postman.com/docs/developer/intro-api/) to retrieve a collection. In this example, we will [export this collection](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#exporting-postman-data) `Day 13: Newman`. Run the collection.\n```\n$ newman run \"Day 13- Newman.postman_collection.json\"\n```\n  It is expected that a few tests fail in the second folder, but not in the first folder.\n1. **Run a folder**: Run the command again, this time adding the option `--folder [folderName]` to the end, to specify the first folder to run from the collection. Make sure you have no failed tests.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution, this time using Newman. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 13: Newman\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Requests added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(2)\r",
+									"\r",
+									"    let planetRequest = collection.item[0].item.find(req => { return req.name === \"planets\"})\r",
+									"    pm.expect(planetRequest.name, 'check planet name').equals(\"planets\")\r",
+									"    pm.expect(planetRequest.request.method, 'check planet method').equals(\"GET\")\r",
+									"    pm.expect(planetRequest.request.url.raw, 'check planet url').includes(\"https://swapi.dev/api/planets\")\r",
+									"\r",
+									"    let speciesRequest = collection.item[0].item.find(req => { return req.name === \"species\"})\r",
+									"    pm.expect(speciesRequest.name, 'check species name').equals(\"species\")\r",
+									"    pm.expect(speciesRequest.request.method, 'check species method').equals(\"GET\")\r",
+									"    pm.expect(speciesRequest.request.url.raw, 'check species url').includes(\"https://swapi.dev/api/species\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Tests and Scripts added correctly\", () => {\r",
+									"    let planetRequest = collection.item[0].item.find(req => { return req.name === \"planets\"})\r",
+									"    let planetTest = planetRequest.event.find(event => { return event.listen === \"test\"})\r",
+									"    pm.expect(planetTest.listen, 'check planet test').equals(\"test\")\r",
+									"    pm.expect(planetTest.script.exec.toString(), 'check planet test syntax').includes(\"pm.test\")\r",
+									"    pm.expect(planetTest.script.exec.toString(), 'check planet tatooine').includes(\"Tatooine\")\r",
+									"\r",
+									"    let speciesRequest = collection.item[0].item.find(req => { return req.name === \"species\"})\r",
+									"    let speciesTest = speciesRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"    pm.expect(speciesTest.listen, 'check species test').equals(\"test\")\r",
+									"    pm.expect(speciesTest.script.exec.toString(), 'check species test syntax').includes(\"pm.test\")\r",
+									"    pm.expect(speciesTest.script.exec.toString(), 'check species Ewokese').includes(\"Ewokese\")\r",
+									"    pm.expect(speciesTest.script.exec.toString(), 'check species log').includes(\"console.log\")\r",
+									"    \r",
+									"    let variable = collection.variable.find(variable => { return variable.key === \"talls\" })\r",
+									"    pm.expect(variable.key, 'check collection variable key').equals(\"talls\")\r",
+									"    pm.expect(parseInt(variable.value), 'check collection variable value').equals(7)\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/1SoUIWEXiqpQk/giphy.gif?cid=ecf05e4774l20o69lifuhyguzi9uinz1co6qx621eakv976l&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media0.giphy.com/media/5mlfqdiGdUaVW/giphy.gif?cid=ecf05e4774l20o69lifuhyguzi9uinz1co6qx621eakv976l&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collection_uid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collection_uid}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment :** Find the `Postman API env` environment from the previous challenge. Update the `collection_uid` with the current collection's ID, so Postman will update the request URL.\n1. **Validate your solution in the Runner**: Save your changes in the collection and environment. Hit **Send** and look under the Tests tab of the server response at the bottom to review your test results.\n1. **Validate your solution in Newman** (optional): Instead of running this request in Postman, you can use Newman to validate your solution from the command line. You may need to do some research on this one. There's many ways to handle sensitive information locally while running Newman, but be careful not to expose your secrets in your public workspace.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "talls",
+			"value": 7
+		}
+	]
+}
