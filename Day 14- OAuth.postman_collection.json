@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "216e08e1-5f5c-4d93-a7eb-e4a8c7bca10c",
+		"name": "Day 14: OAuth",
+		"description": "## Instructions for Day 14: OAuth\n\n1.  **Get the challenge:** Fork [the parent collection `Day 14: OAuth`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0e372950-c58c-483d-aea9-fe676547e6f0) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [OAuth 2.0](https://learning.postman.com/docs/sending-requests/authorization/#oauth-20)\n*   [Variables](https://learning.postman.com/docs/sending-requests/variables/)\n*   [Scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n*   [Writing tests](https://learning.postman.com/docs/writing-scripts/test-scripts/)\n    \n\n## Additional resources\n\n*   [OAuth 2.0](https://www.postman.com/postman/workspace/postman-team-collections/collection/1559645-e1dfc9cb-3de7-4a73-82cd-602334bae284?ctx=documentation) examples\n*   [OAuth 2.0: Implicit Flow is Dead, Try PKCE Instead](https://blog.postman.com/pkce-oauth-how-to/) blog\n*   [Generate Spotify Playlists using a Postman Collection](https://blog.postman.com/generate-spotify-playlists-using-a-postman-collection/) blog\n*   [OAuth](https://www.tiktok.com/@joycejetson/video/7068281874887560494) tiktok\n    \n\n## Next challenge\n\n*   [Write to file](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-b9204eb2-a00b-46b5-b011-89375b39d28b)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "OAuth",
+			"item": [
+				{
+					"name": "github",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var count = pm.response.json().length;\r",
+									"    pm.collectionVariables.set(\"repoCount\", count);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.github.com/user/repos",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"user",
+								"repos"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nWith OAuth 2.0, you first retrieve an access token for the API, then use that token to authenticate future requests. Accessing data via the OAuth 2.0 flow varies greatly between API service providers, but typically involves a few requests back and forth between client application, user, and API. Let's use the GitHub API to learn more about OAuth.\n\n1. **Create an OAuth app**: Follow the GitHub documentation to [create and register a GitHub OAuth app under your account](https://docs.github.com/en/developers/apps/creating-an-oauth-app). \n  - Homepage URL can be anything you want\n  - Authorization callback URL `https://oauth.pstmn.io/v1/browser-callback`\n\n  You will need your client ID and client secret [from GitHub](https://github.com/settings/applications/new) for the next step.\n1. **Get an OAuth access token**: In Postman, select the **Authorization** tab for the folder `OAuth`, and select `OAuth 2.0` from the dropdown. Configure your authorization with these details according to [the GitHub API docs](https://docs.github.com/en/developers/apps/authorizing-oauth-apps#web-application-flow):\n  - Token Name `github oauth`\n  - Auth URL `https://github.com/login/oauth/authorize`\n  - Access Token URL `https://github.com/login/oauth/access_token`\n  - Client ID (from the previous step)\n  - Client Secret (from the previous step)\n\n  > Do NOT paste your client ID and client secret into the fields. Remember you are working in a public workspace. Use a variable as we have done in previous challenges.\n\n  Click the **Get New Access Token** button, and proceed through the authorization flow in Postman to authorize the app.\n\n  Click the **Use Token** button, and remember to set your access token as a variable.\n1. **Use access token**:  Add a request called `github` in the folder `OAuth` with the following details.\n  - `GET` request method\n  - `https://api.github.com/user/repos` request URL\n\n  Under the **Authorization** tab, verify the request will `Inherit auth from parent`. Based on the folder-level configuration you set up in the previous step, Postman will automatically generate the authorization data when the request is sent. Look at the hidden headers under the **Headers** tab to see a `Bearer` token. \n1. **Add a test and script**:\n  - Add a Postman test to ensure a successful `200` response\n  - Add a script to determine how many repositories are returned in the response. Save this number as a collection variable called `repoCount`. Confirm the script is storing this data properly and [persist the data](https://learning.postman.com/docs/sending-requests/variables/#sharing-and-persisting-data) so that `INITIAL VALUE` is the same as `CURRENT VALUE`.\n\nOnce you complete these steps, save your changes and move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "redirect_uri",
+						"value": "https://oauth.pstmn.io/v1/browser-callback",
+						"type": "string"
+					},
+					{
+						"key": "accessTokenUrl",
+						"value": "https://github.com/login/oauth/access_token",
+						"type": "string"
+					},
+					{
+						"key": "authUrl",
+						"value": "https://github.com/login/oauth/authorize",
+						"type": "string"
+					},
+					{
+						"key": "useBrowser",
+						"value": false,
+						"type": "boolean"
+					},
+					{
+						"key": "clientSecret",
+						"value": "9680877e9f2f4966fe2b7cd7dac5865b57b99804",
+						"type": "string"
+					},
+					{
+						"key": "clientId",
+						"value": "292c5cbee48faf5db6dc",
+						"type": "string"
+					},
+					{
+						"key": "tokenName",
+						"value": "github oauth",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 6\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 14: OAuth\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let githubRequest = collection.item[0].item.find(req => { return req.name === \"github\"})\r",
+									"    pm.expect(githubRequest.name, 'check name').equals(\"github\")\r",
+									"    pm.expect(githubRequest.request.method, 'check method').equals(\"GET\")\r",
+									"    pm.expect(githubRequest.request.url.raw, 'check url').equals(\"https://api.github.com/user/repos\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Scripts added correctly\", () => {\r",
+									"    let githubRequest = collection.item[0].item.find(req => { return req.name === \"github\"})\r",
+									"\r",
+									"    let test = githubRequest.event.find(event => {return event.listen === \"test\"})\r",
+									"    pm.expect(test.script.exec.toString(), 'check test').includes(\"pm.test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check collection variable set').includes(\"pm.collectionVariables.set\")\r",
+									"\r",
+									"    let variable = collection.variable.find(variable => { return variable.key == \"repoCount\"})\r",
+									"    pm.expect(variable.key, 'check collection variable name').equals(\"repoCount\")\r",
+									"    pm.expect(parseInt(variable.value), 'check collection variable value').to.be.at.least(0).and.at.most(30)\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Auth added correctly\", () => {\r",
+									"    let oauthFolder = collection.item.find(folder => { return folder.name === \"OAuth\"})\r",
+									"\r",
+									"    pm.expect(oauthFolder.auth.type, 'check folder auth').equals(\"oauth2\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/11QY4zzd3mqHe/giphy.gif?cid=ecf05e47q95tyhyx6y4k6gzmwg24z6unewjjwfeb96vi66dy&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media0.giphy.com/media/Swa5xQjSC7d1GND2g9/giphy.gif?cid=ecf05e47q95tyhyx6y4k6gzmwg24z6unewjjwfeb96vi66dy&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collection_uid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collection_uid}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collection_uid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": "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"
+		},
+		{
+			"key": "repoCount",
+			"value": 30
+		}
+	]
+}
