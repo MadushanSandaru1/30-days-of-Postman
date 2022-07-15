@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "29567f3f-ccf9-4ec1-9275-41a488b5cbc7",
+		"name": "Day 15: Write to file",
+		"description": "## Instructions for Day 15: Write to file\n\n1.  **Get the challenge:** Fork [the parent collection `Day 15: Write to file`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-b9204eb2-a00b-46b5-b011-89375b39d28b) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [`pm.sendRequest()`](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#sending-requests-from-scripts) to send asynchronous requests\n*   [Write to your local file system using a Postman Collection](https://blog.postman.com/write-to-your-local-file-system-using-a-postman-collection/) blog\n    \n\n## Additional resources\n\n*   [Newman write to file](https://github.com/postmanlabs/postman-app-support/issues/3033#issuecomment-301758179) code sample\n*   [Write responses to file](https://www.postman.com/postman/workspace/postman-answers/collection/3407886-888860dd-9e3c-4537-a78e-1c3f3db7535c?ctx=documentation) template\n*   [Write to file](https://www.tiktok.com/@joycejetson/video/7068663207157583150) tiktok\n    \n\n## Next challenge\n\n*   [Pagination](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-e8bb1023-b130-4c60-a8d6-6d983b5b9613)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Write to file",
+			"item": [
+				{
+					"name": "spacex",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.sendRequest({",
+									"    url: 'http://localhost:3000/launches',",
+									"    method: 'POST',",
+									"    header: 'Content-Type:application/x-www-form-urlencoded',",
+									"    body: {",
+									"        mode: 'urlencoded',",
+									"        urlencoded: `payload=${pm.response.text()}`",
+									"    }",
+									"}, function (err, res) {",
+									"    console.log(res)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.spacexdata.com/v4/launches/latest",
+							"protocol": "https",
+							"host": [
+								"api",
+								"spacexdata",
+								"com"
+							],
+							"path": [
+								"v4",
+								"launches",
+								"latest"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\n1. **Run a local server**: Write your own script, or use the following Node.js example.\n  - Download and install [Node.js](https://nodejs.org/en/download/current/) for Linux, Windows, or Mac OSX\n  - Create a file called `script.js` containing [this code](https://gist.github.com/loopDelicious/213881bc1d4c8f64e1404aa7c7cbb413). Add the file to a project directory on your local machine. \n  - Install dependencies in the command line of this project directory\n  ```\n  $ npm install express fs body-parser\n  ```\n  - Start the local server\n  ```\n  $ node script.js\n  ```\n\n  Your local server is now listening for `POST` requests to write payloads to your local file system.\n1. **Add a request**: In Postman, add a request called `spacex` to the folder `Write to file` with the following details:\n  - `GET` method\n  - `https://api.spacexdata.com/v4/launches/latest` request URL\n1. **Add a script**: Under the **Tests** tab, use [`pm.sendRequest()`](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#sending-requests-from-scripts) to send the payload returned from the SpaceX API over to your local server. Here is an example where my local server is listening on port 3000:\n```\npm.sendRequest({\n    url: 'http://localhost:3000/launches',\n    method: 'POST',\n    header: 'Content-Type:application/x-www-form-urlencoded',\n    body: {\n        mode: 'urlencoded',\n        urlencoded: `payload=${pm.response.text()}`\n    }\n}, function (err, res) {\n    console.log(res)\n})\n```\n\n  Send the call to make sure the response is written to your local file system.\n\n> If you're using Postman in your browser, make sure to use the [Desktop Agent](https://learning.postman.com/docs/getting-started/installation-and-updates/#using-postman-on-the-web), otherwise the request to `localhost` will fail. \n\nThis is one example of how to access your local file system, to read data or log entries in a local data store.\n\nOnce you complete these steps, save your changes and move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 15: Write to file\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let spaceRequest = collection.item[0].item.find(req => { return req.name === \"spacex\"})\r",
+									"    pm.expect(spaceRequest.name, 'check name').equals(\"spacex\")\r",
+									"    pm.expect(spaceRequest.request.method, 'check method').equals(\"GET\")\r",
+									"    pm.expect(spaceRequest.request.url.raw, 'check url').equals(\"https://api.spacexdata.com/v4/launches/latest\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Script added correctly\", () => {\r",
+									"    let spaceRequest = collection.item[0].item.find(req => { return req.name === \"spacex\"})\r",
+									"\r",
+									"    let test = spaceRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"    \r",
+									"    pm.expect(test.listen, 'check test script').equals(\"test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check script syntax').to.include(\"pm.sendRequest\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/9Vtk2MOEs4WSHNTj3N/giphy.gif?cid=ecf05e47sili3oo6z3mxho0kclghk4nq87hs1fu3k8zhmcmi&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media1.giphy.com/media/tIFtQ0E69uBIGle98E/giphy.gif?cid=ecf05e47sili3oo6z3mxho0kclghk4nq87hs1fu3k8zhmcmi&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collection_uid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collection_uid}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collection_uid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
