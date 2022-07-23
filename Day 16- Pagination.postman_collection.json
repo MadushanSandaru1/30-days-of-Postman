@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "2bf84eee-2186-4e14-a0ab-9940b811c0c1",
+		"name": "Day 16: Pagination",
+		"description": "## Instructions for Day 16: Pagination\n\n1.  **Get the challenge:** Fork [the parent collection `Day 16: Pagination`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-e8bb1023-b130-4c60-a8d6-6d983b5b9613) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Variables](https://learning.postman.com/docs/sending-requests/variables/)\n*   [Pre-request and Test Scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n*   [Writing tests](https://learning.postman.com/docs/writing-scripts/test-scripts/)\n*   [Building request workflows](https://learning.postman.com/docs/running-collections/building-workflows/)\n*   [Running a collection](https://learning.postman.com/docs/running-collections/intro-to-collection-runs/)\n    \n\n## Additional resources\n\n*   [Pagination](https://www.tiktok.com/@joycejetson/video/7070513310675930414) tiktok\n    \n\n## Next challenge\n\n*   [Visualizations](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0b4d01c7-25b5-4296-91e2-bad1baaf3c6d)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Pagination",
+			"item": [
+				{
+					"name": "xkcd",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"page\", parseInt(pm.collectionVariables.get(\"page\")) + 1);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    postman.setNextRequest(\"xkcd\");",
+									"",
+									"    postman.setNextRequest(null)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://xkcd.com/{{page}}/info.0.json",
+							"protocol": "http",
+							"host": [
+								"xkcd",
+								"com"
+							],
+							"path": [
+								"{{page}}",
+								"info.0.json"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nLet's put together several concepts from previous challenges to learn one approach to handling pagination using popular comic [xkcd's JSON API](https://xkcd.com/json.html).\n\n1. **Add a request**: Add a request called `xkcd` to the folder `Pagination` with the following details:\n  - `GET` request\n  - `http://xkcd.com/1/info.0.json ` request URL\n  \n  Replace the `1` in the request URL using a variable type of your choosing. Name the variable `page` with a temporary value of the number `0`. \n1. **Add a pre-request script**: \n  - Add a script to get the variable and increment it by 1\n  - Save the variable so the incremented value can be used in the request URL \n\n  Send the call to make sure you are getting and setting the `page` variable as expected. Remember you can use the console for more visibility if your code isn't behaving as expected.\n1. **Add a test script**: \n  - Add a test to verify a `200` status code\n  - Add a script to set the next request called to be the `xkcd` request if the response is successful, so that running this collection would page through all the xkcd comics in order until you received an unsuccessful response.\n1. **Run the collection**: \n  - Run the collection or folder in the runner\n  - Make a note of the last call that runs in the collection - the one with the failed test. You will need that page number for an extra step on the solution for this challenge.\n\nIf you need some help, check out the docs and resources listed in the collection overview.\n\nOnce you complete these steps, save your changes and move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 6\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 16: Pagination\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let xkcdRequest = collection.item[0].item.find(req => { return req.name === \"xkcd\"})\r",
+									"    pm.expect(xkcdRequest.name, 'check name').equals(\"xkcd\")\r",
+									"    pm.expect(xkcdRequest.request.method, 'check method').equals(\"GET\")\r",
+									"    pm.expect(xkcdRequest.request.url.raw, 'check url').equals(\"http://xkcd.com/{{page}}/info.0.json\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Scripts added correctly\", () => {\r",
+									"    let xkcdRequest = collection.item[0].item.find(req => { return req.name === \"xkcd\"})\r",
+									"    let prereq = xkcdRequest.event.find(event => { return event.listen === \"prerequest\"})\r",
+									"    pm.expect(prereq.listen, 'check prerequest script').equals(\"prerequest\")\r",
+									"\r",
+									"    let test = xkcdRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"    pm.expect(test.listen, 'check test script').equals(\"test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check test script syntax').to.include(\"postman.setNextRequest(null)\", \"pm.test\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Page is correct\", () => {\r",
+									"    let submitRequest = collection.item[1].item.find(req => { return req.name === \"submit\"})\r",
+									"    pm.expect(submitRequest.request.url.query[0].key, 'check key value').to.equal(\"page\")\r",
+									"    console.log(submitRequest.request.url.query[0].value)\r",
+									"    pm.expect(parseInt(submitRequest.request.url.query[0].value), 'check param value').to.be.above(0)\r",
+									"    \r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media0.giphy.com/media/pHZdGyFNp5sUXq4jp5/giphy.gif?cid=ecf05e47cn3n7rk8t4hh8znpnk60pdjky81e5iiiwzgleqvb&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media4.giphy.com/media/eJ9XEX2KnDZ7MsExru/giphy.gif?cid=ecf05e47ikwls7yxaqa45w6aeyye714aaqwvh2a01bka85j4&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collection_uid}}?page=4",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collection_uid}}"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "4"
+								}
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collection_uid` with the current collection's ID.\n1. **Add query param**: Under the **Params** tab, add a key `page` with a value of the page with a failed test. For example, if your collection run ended with a call to page `2`, you should input `2`.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "page",
+			"value": 1
+		},
+		{
+			"key": "qp_page",
+			"value": 1
+		}
+	]
+}
