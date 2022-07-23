@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "adb2b50e-1257-4881-8c99-b9ee936140dd",
+		"name": "Day 17: Visualizations",
+		"description": "## Instructions for Day 17: Visualizations\n\n1.  **Get the challenge:** Fork [the parent collection `Day 17: Visualizations`](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-0b4d01c7-25b5-4296-91e2-bad1baaf3c6d) from the main workspace to your own public workspace.\n2.  **Read the documentation:** In your fork, select the first folder. Expand the context bar on the right to follow the instructions in the collection documentation.\n3.  **Submit your solution:** Select the second folder `Submit your solution` and follow the instructions in the documentation to validate your solution.\n    \n\n## Concepts covered\n\n*   [Visualizing responses](https://learning.postman.com/docs/sending-requests/visualizer/)\n    \n\n## Additional resources\n\n*   [Visualizer demo](https://youtu.be/i1jU-kivApg) video\n*   [Postman visualizer: More than meets the eye](https://blog.postman.com/how-to-visualize-api-data-in-postman/) blog\n*   [Graphing COVID Time Series Data Using Chart.js](https://blog.postman.com/how-to-graphing-covid-time-series-data-using-chart-js-and-postman-visualizer/) tutorial\n*   [Visualizing Open Brewery Data with Bootstrap](https://blog.postman.com/visualizing-open-brewery-data-with-bootstrap/) tutorial\n*   [Visualization](https://www.tiktok.com/@joycejetson/video/7070886360206363946) tiktok\n    \n\n## Next challenge\n\n*   [API specifications](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/documentation/1559645-c385b569-e55a-4d4f-b252-51a33311ca78)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13776808"
+	},
+	"item": [
+		{
+			"name": "Visualizations",
+			"item": [
+				{
+					"name": "visualizer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"    <table bgcolor=\"#00FFEF\">",
+									"        <tr>",
+									"            <th>Name</th>",
+									"            <th>URL</th>",
+									"        </tr>",
+									"",
+									"        {{#each response.results}}",
+									"            <tr>",
+									"                <td>{{name}}</td>",
+									"                <td>{{url}}</td>",
+									"            </tr>",
+									"        {{/each}}",
+									"    </table>",
+									"`;",
+									"",
+									"pm.visualizer.set(template, {",
+									"    // Pass the response body parsed as JSON as `data`",
+									"    response: pm.response.json()",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pokeapi.co/api/v2/type",
+							"protocol": "https",
+							"host": [
+								"pokeapi",
+								"co"
+							],
+							"path": [
+								"api",
+								"v2",
+								"type"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "It's time to work on your next challenge.\n\nLet's use the [PokéAPI](https://pokeapi.co/docs/v2) to learn how to [visualize response data](https://learning.postman.com/docs/sending-requests/visualizer/) in Postman.\n\n1. **Add a request**: Add a new request called `visualizer` to the folder `Visualizations` with the following details.\n  - `GET` method\n  - `https://pokeapi.co/api/v2/type` request URL\n\n  Send the request and inspect the response. We learned in a previous challenge how to save and parse the response in a script. We can also format the response data in a way that helps us understand this data using visualizations.\n1. **Visualize the response**: Under the **Tests** tab, use the [`pm.visualizer.set()` method](https://learning.postman.com/docs/sending-requests/visualizer/#visualizer-api) to initialize an HTML template string and pass in the response data. Render a two-column table displaying the names and URLs for each type of Pokemon by looping over an array. The titles of each column should be `Name` and `URL` respectively. If you need a hint, [look at the sample code in the documentation](https://learning.postman.com/docs/sending-requests/visualizer/#adding-visualizer-code).\n1. **Style the table**: Use [any method of styling](https://learning.postman.com/docs/sending-requests/visualizer/#adding-styling-and-interaction-to-visualizations) you prefer, but please make the background color of the table precisely `#00FFEF`. You can add any other personal flair that you'd like. Make sure the request returns a successful response, and save your changes.\n\nThis was a simple example of rendering a table. If you're a whiz at front-end development or data visualizations, you can make more advanced visualizations by working with external libraries, and even including JavaScript interactions. If you don't know where to start, browse the [Postman API Network](https://www.postman.com/explore) to find starter templates or check out some tutorials for popular frameworks listed in this collection's documentation.\n\nOnce you complete these steps, move on to the next folder in this collection to submit your solution. Follow the instructions in the request documentation.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Submit your solution",
+			"item": [
+				{
+					"name": "submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// counter for passed tests\r",
+									"let pass = 0\r",
+									"let totalToPass = 5\r",
+									"\r",
+									"let collection = pm.response.json().collection\r",
+									"\r",
+									"pm.test(\"If you have any failures, review the failed test results or ask for support in the community forum. Remember to save your changes if you update the collection. When all of your tests pass, you are done with today's challenge.\", () => {\r",
+									"    pm.expect(true);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pass += 1\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct collection returned\", () => {\r",
+									"    pm.expect(collection.info.name).equals(\"Day 17: Visualizations\")\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Request added correctly\", () => {\r",
+									"    pm.expect(collection.item[0].item.length, 'check number of requests').equals(1)\r",
+									"\r",
+									"    let visualizerRequest = collection.item[0].item.find(req => { return req.name === \"visualizer\"})\r",
+									"    pm.expect(visualizerRequest.name, 'check name').equals(\"visualizer\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Visualization added correctly\", () => {\r",
+									"    let visualizerRequest = collection.item[0].item.find(req => { return req.name === \"visualizer\"})\r",
+									"    let test = visualizerRequest.event.find(event => { return event.listen === \"test\" })\r",
+									"\r",
+									"    pm.expect(visualizerRequest.request.url.raw, 'check url').equals(\"https://pokeapi.co/api/v2/type\")\r",
+									"    pm.expect(test.listen, 'check test').equals(\"test\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check visualizer').includes(\"pm.visualizer.set(\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check table header Name').includes(\"<th>Name</th>\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check table header URL').includes(\"<th>URL</th>\")\r",
+									"    pm.expect(test.script.exec.toString(), 'check table bg hex').includes(\"#00FFEF\")\r",
+									"\r",
+									"    pass += 1\r",
+									"})\r",
+									"\r",
+									"// visualization for test results\r",
+									"let template\r",
+									"if (pass == totalToPass) {\r",
+									"    template = `🍪 passing!\r",
+									"        <br />\r",
+									"        <img src=\"https://media4.giphy.com/media/QxqqwXQuSWufNazWWU/giphy.gif?cid=ecf05e47cn3n7rk8t4hh8znpnk60pdjky81e5iiiwzgleqvb&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"} else {\r",
+									"    template = `🙅 please try again\r",
+									"        <br />\r",
+									"        <img src=\"https://media2.giphy.com/media/H4oLWS4veh9kqxQ1z2/giphy.gif?cid=ecf05e47ikwls7yxaqa45w6aeyye714aaqwvh2a01bka85j4&rid=giphy.gif&ct=g\" />\r",
+									"    `\r",
+									"}\r",
+									"pm.visualizer.set(template)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{postman_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.getpostman.com/collections/{{collection_uid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"getpostman",
+								"com"
+							],
+							"path": [
+								"collections",
+								"{{collection_uid}}"
+							]
+						},
+						"description": "It's time to submit your solution.\n\n1. **Use a Postman environment:** Find the `Postman API env` environment from the previous challenge. Update the `collection_uid` with the current collection's ID.\n1. **Validate your solution**: Save your changes in the collection and environment. Hit **Send** and look under the **Tests** tab of the server response at the bottom to review your test results.\n\nIf you have any failures, review the failed test results or ask for support in the [community forum](https://community.postman.com/). When all of your tests pass, you are done with today's challenge. Remember to save your changes as you'll need to pass all the challenges to claim a **30 days of Postman** badge."
+					},
+					"response": []
+				}
+			],
+			"description": "Follow the instructions in the request documentation."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
